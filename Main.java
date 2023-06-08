@@ -13,7 +13,15 @@ public class Main {
                 .addToy(new Toy(4, "Мяч", 1, 5))
                 .addToy(new Toy(5, "Кукла", 4, 25));
 
-        System.out.println("В розыгрыше находятся");
+        System.out.println("В розыгрыше находятся\n");
+        System.err.println(toysList);
+
+        for (Toy toy : toysList) {
+            if (toy.getName().equals("Конструктор")) {
+                toysList.dellToy(toy);
+            }
+        }
+
         System.err.println(toysList);
     }
 }

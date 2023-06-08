@@ -25,4 +25,20 @@ public class Toy {
 
         return res.toString();
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getChance() {
+        return chance;
+    }
 }
