@@ -22,6 +22,12 @@ public class Main {
             }
         }
 
+        for (Toy toy : toysList) {
+            if (toy.getId() == 5) {
+                toy.setChance(50);
+            }
+        }
+
         System.err.println(toysList);
     }
 }

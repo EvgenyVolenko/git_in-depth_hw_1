@@ -41,4 +41,8 @@ public class Toy {
     public int getChance() {
         return chance;
     }
+
+    public void setChance(int chance) {
+        this.chance = chance;
+    }
 }
