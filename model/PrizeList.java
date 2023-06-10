@@ -1,19 +1,19 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
+import java.util.LinkedList;
 
-public class PrizeList {
+public class PrizeList implements Iterable<Toy>{
     
-    private List<Toy> toys = new ArrayList<>();
+    private LinkedList<Toy> toys = new LinkedList<>();
 
     public PrizeList addToy(Toy newToy) {
         this.toys.add(newToy);
         return this;
     }
 
-    public void dellToy(){
-        toys.remove(0);
+    public Toy dellToy(){
+        return toys.removeFirst();
     }
 
     @Override
@@ -21,8 +21,27 @@ public class PrizeList {
         StringBuilder res = new StringBuilder();
         for (Toy toy : toys) {
             res.append(toy)
-                    .append("\n");
+                .append("\n");
         }
         return res.toString();
+    }
+
+    @Override
+    public Iterator<Toy> iterator() {
+        return new Iterator<Toy>() {
+            int counter = 0;
+
+            @Override
+            public boolean hasNext() {
+                if (counter < toys.size())
+                    return true;
+                return false;
+            }
+
+            @Override
+            public Toy next() {
+                return toys.get(counter++);
+            }
+        };
     }
 }

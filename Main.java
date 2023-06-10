@@ -1,3 +1,4 @@
+import controllers.WriteFile;
 import model.PrizeList;
 import model.RaffleList;
 import model.Toy;
@@ -8,8 +9,12 @@ public class Main {
 
         RaffleList toysList = new RaffleList();
         PrizeList pList = new PrizeList();
+
+        String fname = "issuedToys.txt";
+        
         Toy toyToPrize = null;
         int c = 10; // Количество розыгрышей
+        int v = 5; // Количество выданных игрушек
 
         toysList.addToy(new Toy(7, "Конструктор", 1, 5))
                 .addToy(new Toy(2, "Мягкая игрушка", 4, 20))
@@ -25,6 +30,7 @@ public class Main {
         for (Toy toy : toysList) {
             if (toy.getId() == 5) {
                 toy.setChance(50);
+                System.out.println("ИЗМЕНЕНА ВЕРОЯТНОСТЬ ВЫПАДЕНИЯ:\n" + toy + toy.getChance() + "\n");
             }
         }
 
@@ -40,8 +46,15 @@ public class Main {
             }
         }
 
-        System.err.println("ОСТАЛИСЬ:\n" + toysList);
+        System.out.println("ОСТАЛИСЬ:\n" + toysList);
 
         System.out.println("РАЗЫГРАНЫ:\n" + pList);
+
+        for (int i = 0; i < v; i++) {
+            toyToPrize = pList.dellToy();
+            WriteFile.WrFile(fname, toyToPrize);
+        }
+
+        System.out.println("НЕ ВЫДАНЫ:\n" + pList);
     }
 }

@@ -18,7 +18,7 @@ public class Toy implements Comparable<Toy>{
         this.id = id;
         this.name = name;
     }
-    
+
     @Override
     public String toString() {
         
@@ -31,6 +31,10 @@ public class Toy implements Comparable<Toy>{
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
