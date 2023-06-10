@@ -13,8 +13,8 @@ public class Main {
         String fname = "issuedToys.txt";
         
         Toy toyToPrize = null;
-        int c = 10; // Количество розыгрышей
-        int v = 5; // Количество выданных игрушек
+        int c = 25; // Количество розыгрышей
+        int v = 10; // Количество выданных игрушек
 
         toysList.addToy(new Toy(7, "Конструктор", 1, 5))
                 .addToy(new Toy(2, "Мягкая игрушка", 4, 20))
