@@ -9,7 +9,7 @@ public class Main {
         RaffleList toysList = new RaffleList();
         PrizeList pList = new PrizeList();
         Toy toyToPrize = null;
-        int c = 20; // Количество розыгрышей
+        int c = 10; // Количество розыгрышей
 
         toysList.addToy(new Toy(7, "Конструктор", 1, 5))
                 .addToy(new Toy(2, "Мягкая игрушка", 4, 20))
@@ -19,7 +19,7 @@ public class Main {
 
         toysList.SortList();
 
-        System.out.println("В розыгрыше находятся\n");
+        System.out.println("В РОЗЫГРЫШЕ\n");
         System.err.println(toysList);
 
         for (Toy toy : toysList) {
@@ -30,17 +30,18 @@ public class Main {
 
         for (int i = 0; i < c; i++) {
             toyToPrize = toysList.Roulette();
-            if (toyToPrize == null) {
-                System.out.println("ВСЕ ИГРУШКИ РАЗЫГРАНЫ!!!");
-            } else if (toyToPrize.getCount() == 0) {
+            pList.addToy(toyToPrize);
+            if (toyToPrize.getCount() == 0) {
                 toysList.dellToy(toyToPrize);
-            } else {
-                pList.addToy(toyToPrize);
+            }
+            if (toysList.sizeList() == 0) {
+                System.out.println("ВСЕ ИГРУШКИ РАЗЫГРАНЫ!!!");
+                break;
             }
         }
 
-        System.err.println("Остались: " + toysList);
-        
-        System.out.println(pList);
+        System.err.println("ОСТАЛИСЬ:\n" + toysList);
+
+        System.out.println("РАЗЫГРАНЫ:\n" + pList);
     }
 }

@@ -21,7 +21,7 @@ public class RaffleList implements Iterable<Toy> {
         while (iterator.hasNext()) {
             Toy toy = iterator.next();
             if (toy == clearToy) {
-                System.out.println("УДАЛЕНИЕ " + toy.toString());
+                System.out.println("ЗАКОНЧИЛОСЬ: " + toy.toString() + "\n");
                 iterator.remove();
             }
         }
