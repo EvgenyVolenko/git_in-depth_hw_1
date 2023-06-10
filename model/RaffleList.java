@@ -1,34 +1,33 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-public class DrowingList implements Iterable<Toy>{
-    
+public class RaffleList implements Iterable<Toy> {
+
     private List<Toy> toys = new ArrayList<>();
 
-    public DrowingList addToy(Toy newToy) {
+    public RaffleList addToy(Toy newToy) {
         this.toys.add(newToy);
         return this;
     }
 
     public void dellToy(Toy clearToy) {
         Iterator<Toy> iterator = toys.iterator();
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             Toy toy = iterator.next();
             if (toy == clearToy) {
                 System.out.println("УДАЛЕНИЕ " + toy.toString());
-              iterator.remove();
+                iterator.remove();
             }
         }
     }
 
-    public int sizeList(){
+    public int sizeList() {
         return toys.size();
     }
 
@@ -37,7 +36,9 @@ public class DrowingList implements Iterable<Toy>{
         StringBuilder res = new StringBuilder();
         for (Toy toy : toys) {
             res.append(toy)
-               .append("\n");
+                .append(String.format("Шанс выпадения в розыгрыше: %d | ", toy.getChance()))
+                .append(String.format("Количество: %d |", toy.getCount()))
+                .append("\n");
         }
         return res.toString();
     }
@@ -61,38 +62,43 @@ public class DrowingList implements Iterable<Toy>{
         };
     }
 
-    public void Roulette(int a) {
+    public void SortList() {
+
+        Collections.sort(toys);
+    }
+
+    public Toy Roulette() {
 
         Random rnd = new Random();
 
-        Collections.sort(toys);
-    
         int x = sizeList();
-    
+
         int[] toyid = new int[x];
         int[] chance = new int[x];
-    
+
         x = 0;
-    
+
         for (Toy toy : this) {
             toyid[x] = toy.getId();
             chance[x] = toy.getChance();
             x++;
         }
-        
+
         int count = IntStream.of(chance).sum();
+        int index = rnd.nextInt(count);
 
-        for (int randomNumsCount = 0; randomNumsCount < a; randomNumsCount++) {
-            
-            int index = rnd.nextInt(count);
-
-            for (int i = 0; i < chance.length; i++) {
-                index -= chance[i];
-                if(index < 0) {
-                    System.out.println("Случайное число: " + toyid[i]);
-                    break;
+        for (int i = 0; i < chance.length; i++) {
+            index -= chance[i];
+            if (index < 0) {
+                for (Toy toy : this) {
+                    if (toy.getId() == toyid[i]) {
+                        toy.setCount(toy.getCount() - 1);
+                        return toy;
+                    }
                 }
+                break;
             }
         }
+        return null;
     }
 }

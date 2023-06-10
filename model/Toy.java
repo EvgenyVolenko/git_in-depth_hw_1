@@ -13,15 +13,18 @@ public class Toy implements Comparable<Toy>{
         this.count = count;
         this.chance = chance;
     }
+
+    public Toy(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
     
     @Override
     public String toString() {
         
         StringBuilder res = new StringBuilder();
-        res.append(String.format("Идентификатор: %d\n", this.id))
-           .append(String.format("Игрушка: %s\n", this.name))
-           .append(String.format("Шанс выпадения в розыгрыше: %d\n", chance))
-           .append(String.format("Количество: %d\n", this.count));
+        res.append(String.format("| Идентификатор: %d | ", this.id))
+           .append(String.format("Игрушка: %s | ", this.name));
 
         return res.toString();
     }
@@ -36,6 +39,10 @@ public class Toy implements Comparable<Toy>{
 
     public int getCount() {
         return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getChance() {
