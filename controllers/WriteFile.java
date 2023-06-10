@@ -11,8 +11,8 @@ public class WriteFile {
         
         try(FileWriter writer = new FileWriter(fName, true))
         {
-            String text = toy.toString();
-            writer.write(text);
+            String txt = "Выдано:" + "ID игрушки - " + toy.getId() + ": " + toy.getName();
+            writer.write(txt);
             writer.append('\n');
                          
             writer.flush();
@@ -21,6 +21,5 @@ public class WriteFile {
              
             System.out.println(ex.getMessage());
         } 
-
     }
 }
