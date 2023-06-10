@@ -1,8 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 public class DrowingList implements Iterable<Toy>{
     
@@ -22,6 +26,10 @@ public class DrowingList implements Iterable<Toy>{
               iterator.remove();
             }
         }
+    }
+
+    public int sizeList(){
+        return toys.size();
     }
 
     @Override
@@ -51,5 +59,40 @@ public class DrowingList implements Iterable<Toy>{
                 return toys.get(counter++);
             }
         };
+    }
+
+    public void Roulette(int a) {
+
+        Random rnd = new Random();
+
+        Collections.sort(toys);
+    
+        int x = sizeList();
+    
+        int[] toyid = new int[x];
+        int[] chance = new int[x];
+    
+        x = 0;
+    
+        for (Toy toy : this) {
+            toyid[x] = toy.getId();
+            chance[x] = toy.getChance();
+            x++;
+        }
+        
+        int count = IntStream.of(chance).sum();
+
+        for (int randomNumsCount = 0; randomNumsCount < a; randomNumsCount++) {
+            
+            int index = rnd.nextInt(count);
+
+            for (int i = 0; i < chance.length; i++) {
+                index -= chance[i];
+                if(index < 0) {
+                    System.out.println("Случайное число: " + toyid[i]);
+                    break;
+                }
+            }
+        }
     }
 }
